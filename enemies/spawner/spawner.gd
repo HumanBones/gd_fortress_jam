@@ -8,6 +8,7 @@ export(PackedScene) var whatToSpawn
 export(int) var interval
 export(int) var spawnCount = 1
 export(float) var radius setget do_update
+export(NodePath) var towerPath
 
 # VARIABLES
 ####
@@ -38,10 +39,12 @@ func _process(delta):
 ####
 
 func spawn():
+	var tower = get_node(towerPath)
 	for _i in spawnCount:
 		var entity = whatToSpawn.instance()
 		var pos = get_random_point_in_radius()
 		entity.set_position(pos)
+		entity.set_target(tower.global_position)
 		add_child(entity)
 
 func get_random_point_in_radius():
