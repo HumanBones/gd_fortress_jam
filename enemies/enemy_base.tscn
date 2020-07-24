@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+func _ready():
+	$Animation.play(\"idle\")
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8.79814, 7.13639 )
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( -1.48651, 0.520279 )
+z_index = 10
+collision_layer = 2
+collision_mask = 2147483650
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+hframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.132435, -0.595947 )
+shape = SubResource( 2 )

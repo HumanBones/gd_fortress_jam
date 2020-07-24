@@ -8,7 +8,7 @@ export var movement_speed = 85.0
 # OVERRIDES
 ####
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	movement()
 
 # USER DEFINED
