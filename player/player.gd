@@ -52,7 +52,7 @@ func movement():
 		anim.play("Run")
 		if direction.x == -1:
 			$sprite_player.flip_h = true
-		else:
+		elif direction.x == 1:
 			$sprite_player.flip_h = false
 	else:
 		anim.play("Idle")
