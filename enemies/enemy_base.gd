@@ -12,3 +12,7 @@ func _physics_process(_delta):
 
 func set_target(new_target):
 	target = new_target
+
+# THIS IS THE LOGIC WHEN ENEMY REACHES THE TOWER
+func tower_hit():
+	print("YOU SHOULD IMPLEMENT tower_hit FOR -> ", self.name)

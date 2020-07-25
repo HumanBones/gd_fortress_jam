@@ -1,10 +1,90 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://enemies/enemy_base.tscn" type="PackedScene" id=1]
-[ext_resource path="res://enemies/flying/flying.png" type="Texture" id=2]
+[ext_resource path="res://enemies/flying/bat_dead.png" type="Texture" id=2]
+[ext_resource path="res://enemies/flying/flying.gd" type="Script" id=3]
+[ext_resource path="res://enemies/flying/flying.png" type="Texture" id=4]
 
-[sub_resource type="Animation" id=1]
-resource_name = "idle"
+[sub_resource type="VisualShader" id=1]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="VisualShaderNodeInput" id=3]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeTexture" id=4]
+source = 1
+
+[sub_resource type="VisualShader" id=5]
+graph_offset = Vector2( -188, -42 )
+nodes/vertex/0/position = Vector2( 480, 180 )
+nodes/vertex/2/node = SubResource( 3 )
+nodes/vertex/2/position = Vector2( -80, 120 )
+nodes/vertex/3/node = SubResource( 4 )
+nodes/vertex/3/position = Vector2( 184, 162 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "angry"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.866667, 0.235294, 0.235294, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.164795, 0.358889, 0.580797 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "dying"
+length = 0.31
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.5 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=9]
 length = 0.32
 loop = true
 tracks/0/type = "value"
@@ -21,11 +101,18 @@ tracks/0/keys = {
 }
 
 [node name="Flying" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
-texture = ExtResource( 2 )
-frame = 0
+material = SubResource( 2 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+material = SubResource( 6 )
 
 [node name="Animation" type="AnimationPlayer" parent="." index="2"]
 autoplay = "idle"
-anims/idle = SubResource( 1 )
+anims/angry = SubResource( 7 )
+anims/dying = SubResource( 8 )
+anims/idle = SubResource( 9 )

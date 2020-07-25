@@ -14,6 +14,7 @@ export(NodePath) var towerPath
 ####
 
 var time
+var should_spawn = true
 
 # OVERRIDES
 ####
@@ -33,7 +34,9 @@ func _process(delta):
 		
 		if time <= 0:
 			time = interval
-			spawn()
+			if should_spawn:
+				should_spawn = false
+				spawn()
 
 # USER DEFINED
 ####
