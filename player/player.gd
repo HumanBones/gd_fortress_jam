@@ -51,9 +51,9 @@ func movement():
 	if direction != Vector2.ZERO:
 		anim.play("Run")
 		if direction.x == -1:
-			$player.flip_h = true
+			$sprite_player.flip_h = true
 		else:
-			$player.flip_h = false
+			$sprite_player.flip_h = false
 	else:
 		anim.play("Idle")
 		
