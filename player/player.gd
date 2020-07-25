@@ -3,10 +3,21 @@ extends KinematicBody2D
 # EXPORTS
 ####
 
+
+
 export var movement_speed = 85.0
+
+
+# ONREADY VARS
+###
+onready var anim = $Player_Animation #animationPlayer #Run #Idle
 
 # OVERRIDES
 ####
+
+func _ready():
+	anim.play("Idle")
+
 
 func _process(delta):
 	if Input.is_action_pressed("restart"):
@@ -19,6 +30,7 @@ func _physics_process(_delta):
 ####
 
 func movement():
+	
 	var direction = Vector2()
 	
 	if Input.is_action_pressed("ui_left"):
@@ -34,3 +46,14 @@ func movement():
 		direction += Vector2.UP
 	
 	move_and_slide(movement_speed * direction)
+	
+	#Playes animation if moving
+	if direction != Vector2.ZERO:
+		anim.play("Run")
+		if direction.x == -1:
+			$player.flip_h = true
+		else:
+			$player.flip_h = false
+	else:
+		anim.play("Idle")
+		
