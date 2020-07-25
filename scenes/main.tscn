@@ -45,8 +45,8 @@ editor_draw_drag_margin = true
 [node name="WestSpawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 107.494, 271.92 )
 whatToSpawn = ExtResource( 4 )
-interval = 1
-spawnCount = 3
+interval = 5
+spawnCount = 8
 radius = 75.0
 towerPath = NodePath("../WestTower")
 

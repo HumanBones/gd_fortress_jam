@@ -26,6 +26,11 @@ func tower_hit():
 			var item = singleton().memory["flying_tower_count"].pop_front()
 			item.find_node("Animation").play("dying")
 			popout.append(item)
+	
+		for entity in popout:
+			var animator = entity.find_node("Animation")
+			if animator.is_playing():
+				yield(animator, "animation_finished")
 			
-		
+			entity.queue_free()
 

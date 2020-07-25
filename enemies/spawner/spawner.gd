@@ -35,7 +35,7 @@ func _process(delta):
 		if time <= 0:
 			time = interval
 			if should_spawn:
-				should_spawn = false
+				# should_spawn = false FOR TESTING 1 WAVE
 				spawn()
 
 # USER DEFINED
