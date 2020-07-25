@@ -67,7 +67,7 @@ radius = 75.0
 towerPath = NodePath("../WestTower")
 
 [node name="WestTower" type="Sprite" parent="."]
-position = Vector2( 282.862, 262.462 )
+position = Vector2( 319.278, 264.583 )
 texture = ExtResource( 6 )
 hframes = 12
 frame = 1
